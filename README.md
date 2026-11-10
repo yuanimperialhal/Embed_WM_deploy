@@ -157,3 +157,4 @@ python3 packaging/configure_repository.py https://github.com/你的用户名/你
 详细流程见 [GitHub 发布指南](docs/github-release.md)；用户操作见 [安装版说明](docs/installed-app-guide.md)；功能变更见 [发行记录](docs/release-notes.md)；依赖和模型条款见 [第三方说明](THIRD_PARTY_NOTICES.md)。旧的单图基准、相机命令行与调参记录见 [开发参考](docs/development-guide.md)。
 # Embed_WM_deploy
 # Embed_WM_deploy
+# Embed_WM_deploy
