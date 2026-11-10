@@ -11,9 +11,9 @@
 ## 下载安装
 
 <!-- release-links:start -->
-**本地安装包：[下载 DEB](dist/cosmos-camera_latest_arm64.deb) · [SHA256](dist/cosmos-camera_latest_arm64.deb.sha256)**
+**[下载最新版 DEB（Jetson arm64）](https://github.com/yuanimperialhal/Embed_WM_deploy/releases/latest/download/cosmos-camera_latest_arm64.deb)** · [SHA256 校验文件](https://github.com/yuanimperialhal/Embed_WM_deploy/releases/latest/download/cosmos-camera_latest_arm64.deb.sha256) · [全部版本与更新说明](https://github.com/yuanimperialhal/Embed_WM_deploy/releases)
 
-GitHub 在线下载地址尚未配置。维护者运行 `python3 packaging/configure_repository.py OWNER/REPO` 后，此处会自动替换成该仓库的最新版安装包直链；首次 Release 发布成功后生效。`dist/` 是构建输出，不提交到 Git。
+下载链接在首次 GitHub Release 成功发布后生效。
 <!-- release-links:end -->
 
 ### 1. 确认设备

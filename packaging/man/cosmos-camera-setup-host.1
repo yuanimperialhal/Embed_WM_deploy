@@ -1,0 +1,18 @@
+.TH COSMOS-CAMERA-SETUP-HOST 1 "November 2026" "Cosmos Camera" "User Commands"
+.SH NAME
+cosmos-camera-setup-host \- configure Jetson Docker runtime and user access
+.SH SYNOPSIS
+.B sudo cosmos-camera-setup-host
+.SH DESCRIPTION
+Enables Docker and registers the NVIDIA runtime if absent, restarting Docker
+when registration is needed. Adds the invoking desktop user to the docker and
+video groups. The user is determined from PKEXEC_UID or SUDO_UID.
+Drivers and JetPack must already be installed.
+.SH NOTES
+The docker group grants administrator-level capabilities. Restarting Docker
+may affect other containers. After adding groups, log out of the desktop and
+log in again. The first-run dialog can invoke this helper through graphical
+administrator authorization. Package installation does not run it automatically.
+This helper does not download models or start inference.
+.SH SEE ALSO
+.BR cosmos-camera (1)

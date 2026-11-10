@@ -1,0 +1,42 @@
+.TH COSMOS-CAMERA 1 "November 2026" "Cosmos Camera" "User Commands"
+.SH NAME
+cosmos-camera \- Jetson desktop camera and Cosmos visual reasoning assistant
+.SH SYNOPSIS
+.B cosmos-camera
+.RI [ options ]
+.SH DESCRIPTION
+Shows a USB camera preview and runs sampled images through a local Cosmos model.
+On first use, a setup dialog downloads and verifies the pinned model and container.
+Model access must be granted by the original model publisher.
+Requires Jetson Orin, Ubuntu 22.04 and L4T R36.4.x.
+.SH OPTIONS
+.TP
+.B --setup
+Open the first-run setup dialog again.
+.TP
+.B --check
+Print environment diagnostics without opening a window or loading the model.
+.TP
+.B --no-camera
+Open the application without automatically starting the camera.
+.TP
+.BI --source " DEVICE"
+Override the saved camera source for this session.
+.TP
+.B --version
+Print the application version.
+.SH FILES
+.TP
+.I ~/.config/cosmos-camera/settings.json
+User settings, including model path, camera and prompt.
+.TP
+.I ~/.local/share/cosmos-camera/models/
+Downloaded model versions.
+.TP
+.I ~/.local/state/cosmos-camera/logs/
+Analysis and model service logs.
+.SH NOTES
+Run the application as a regular desktop user. Standard XDG directory overrides
+are supported. Removing the package preserves user models, settings and logs.
+.SH SEE ALSO
+.BR cosmos-camera-setup-host (1)

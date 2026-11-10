@@ -1,0 +1,116 @@
+#!/bin/sh
+exec /usr/bin/python3 - "$0" "$@" <<'COSMOS_PYTHON_BOOTSTRAP'
+import argparse
+import hashlib
+import json
+import os
+from pathlib import Path, PurePosixPath
+import shutil
+import subprocess
+import sys
+import tarfile
+import tempfile
+
+METADATA = __METADATA__
+PAYLOAD_SHA256 = "__PAYLOAD_SHA256__"
+MARKER = b'__COSMOS_PAYLOAD__\n'
+GIB = 1024**3
+
+
+def open_payload(path):
+    stream = path.open('rb')
+    while True:
+        line = stream.readline()
+        if line == MARKER:
+            return stream
+        if not line:
+            stream.close()
+            raise RuntimeError('安装包缺少数据段。')
+
+
+def verify(path):
+    digest = hashlib.sha256()
+    print('正在检查安装包完整性…', flush=True)
+    with open_payload(path) as stream:
+        for chunk in iter(lambda: stream.read(4 * 1024 * 1024), b''):
+            digest.update(chunk)
+    if digest.hexdigest() != PAYLOAD_SHA256:
+        raise RuntimeError('安装包校验失败，请重新复制文件；未执行安装。')
+    print('安装包校验通过。', flush=True)
+
+
+def extract(path, target):
+    required = METADATA['unpacked_bytes'] + GIB
+    if shutil.disk_usage(target).free < required:
+        raise RuntimeError(f'解包目录空间不足，至少需要 {required/GIB:.1f} GiB。')
+    seen = set()
+    expected = METADATA['file_count']
+    total = 0
+    print('正在解包应用、模型、镜像和系统依赖…', flush=True)
+    with open_payload(path) as stream, tarfile.open(fileobj=stream, mode='r|gz') as archive:
+        for member in archive:
+            name = PurePosixPath(member.name)
+            if (not member.isfile() or name.is_absolute() or '..' in name.parts
+                    or '\\' in member.name or member.name in seen):
+                raise RuntimeError('安装包包含不支持的文件：' + member.name)
+            seen.add(member.name)
+            total += member.size
+            if len(seen) > expected or total > METADATA['unpacked_bytes']:
+                raise RuntimeError('安装包数据超过声明范围。')
+            destination = target.joinpath(*name.parts)
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            with archive.extractfile(member) as source, destination.open('xb') as output:
+                shutil.copyfileobj(source, output, 4 * 1024 * 1024)
+            destination.chmod(0o644)
+    if len(seen) != expected or total != METADATA['unpacked_bytes']:
+        raise RuntimeError('安装包数据不完整。')
+
+
+def main():
+    bundle = Path(sys.argv[1]).resolve()
+    parser = argparse.ArgumentParser(description='Cosmos 相机助手：Jetson 单文件离线安装器')
+    action = parser.add_mutually_exclusive_group()
+    action.add_argument('--info', action='store_true', help='显示内容与目标环境')
+    action.add_argument('--check', action='store_true', help='只校验完整性，不解包、不安装')
+    action.add_argument('--extract', type=Path, help='只解包到一个不存在的新目录')
+    action.add_argument('--install', action='store_true', help='离线安装；使用 sudo 运行')
+    parser.add_argument('--work-dir', type=Path, default=Path('/var/tmp'), help='解包临时目录的父目录')
+    parser.add_argument('--user', help='将来使用界面的普通用户名；默认取 sudo 的原用户')
+    args = parser.parse_args(sys.argv[2:])
+    if not (args.check or args.extract or args.install):
+        print(json.dumps(METADATA, ensure_ascii=False, indent=2))
+        print('\n安装命令：sudo ./'+bundle.name+' --install\n校验命令：./'+bundle.name+' --check')
+        return 0
+    if args.install and os.geteuid() != 0:
+        parser.error('安装需要管理员权限，请使用 sudo 运行此文件并加 --install。')
+    if args.install and (os.uname().machine != 'aarch64' or not Path('/etc/nv_tegra_release').is_file()):
+        parser.error('本安装包只支持 Jetson Linux arm64。')
+    verify(bundle)
+    if args.check:
+        return 0
+    if args.extract:
+        target = args.extract.expanduser().resolve()
+        target.mkdir(parents=True, exist_ok=False)
+        extract(bundle, target)
+        print('已解包：'+str(target)+'\n未安装软件，也未导入 Docker 镜像。')
+        return 0
+    parent = args.work_dir.resolve()
+    parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix='cosmos-offline-', dir=parent) as temporary:
+        target = Path(temporary)
+        extract(bundle, target)
+        command = ['/usr/bin/python3', '-B', str(target/'install.py'), '--install']
+        user = args.user or os.environ.get('SUDO_USER')
+        if user:
+            command += ['--user', user]
+        subprocess.run(command, cwd=target, check=True)
+    return 0
+
+try:
+    raise SystemExit(main())
+except (OSError, ValueError, RuntimeError, subprocess.CalledProcessError, tarfile.TarError) as exc:
+    print('未完成：'+str(exc), file=sys.stderr)
+    raise SystemExit(1)
+COSMOS_PYTHON_BOOTSTRAP
+exit 1
+__COSMOS_PAYLOAD__
