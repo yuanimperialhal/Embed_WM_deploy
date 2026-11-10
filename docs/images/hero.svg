@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="504" viewBox="0 0 1440 504" role="img" aria-labelledby="title desc">
+  <title id="title">Embed WM Deploy — World models. On your edge.</title>
+  <desc id="desc">A dark navy project cover with mint typography and an abstract spatial perception diagram. Cosmos visual reasoning for NVIDIA Jetson.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#101d2b"/><stop offset="1" stop-color="#09131d"/></linearGradient>
+    <linearGradient id="plane" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#87e8b0" stop-opacity=".13"/><stop offset="1" stop-color="#87e8b0" stop-opacity=".015"/></linearGradient>
+    <linearGradient id="box" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#9fecbb" stop-opacity=".2"/><stop offset="1" stop-color="#9fecbb" stop-opacity=".03"/></linearGradient>
+  </defs>
+  <rect width="1440" height="504" rx="22" fill="url(#bg)"/>
+  <rect x=".5" y=".5" width="1439" height="503" rx="22" fill="none" stroke="#263844"/>
+  <g fill="none" stroke="#20343f" stroke-width="1" opacity=".42">
+    <path d="M816 45V414M880 45V414M944 45V414M1008 45V414M1072 45V414M1136 45V414M1200 45V414M1264 45V414M1328 45V414"/>
+    <path d="M788 94H1376M788 158H1376M788 222H1376M788 286H1376M788 350H1376"/>
+  </g>
+  <g font-family="DejaVu Sans, Arial, sans-serif">
+    <g transform="translate(60 48)" stroke="#a2f0bf" stroke-width="2.5" fill="none">
+      <path d="M0 11V0H11M23 0H34V11M34 23V34H23M11 34H0V23"/>
+      <path d="M10 17L17 10L24 17L17 24Z"/>
+    </g>
+    <text x="112" y="72" fill="#eef5f5" font-size="22" font-weight="700" letter-spacing="2">EMBED WM DEPLOY</text>
+    <rect x="1194" y="47" width="186" height="32" rx="16" fill="#142a28" stroke="#2b4b40"/>
+    <circle cx="1213" cy="63" r="3.5" fill="#a2f0bf"/>
+    <text x="1227" y="68" fill="#b4d6c3" font-size="12" letter-spacing="1.3">EDGE INTELLIGENCE</text>
+    <text x="59" y="190" fill="#f1f6f6" font-size="68" font-weight="700" letter-spacing="-2.5">WORLD MODELS.</text>
+    <text x="59" y="268" fill="#a2f0bf" font-size="68" font-weight="700" letter-spacing="-2.5">ON YOUR EDGE.</text>
+    <text x="64" y="318" fill="#a0b3be" font-size="19">Cosmos visual reasoning. A desktop experience.</text>
+    <g transform="translate(64 351)" font-size="12" letter-spacing="1.5" fill="#c5d7df">
+      <text x="0" y="0">NVIDIA JETSON</text><circle cx="145" cy="-4" r="2" fill="#52717a"/>
+      <text x="163" y="0">LOCAL INFERENCE</text><circle cx="325" cy="-4" r="2" fill="#52717a"/>
+      <text x="343" y="0">DEB INSTALLER</text>
+    </g>
+    <path d="M60 414H1380" stroke="#2a3d47"/>
+    <g font-size="14" letter-spacing="1.5">
+      <text x="64" y="463" fill="#a2f0bf">01</text><text x="99" y="463" fill="#b7c7ce">DEPLOY</text>
+      <text x="265" y="463" fill="#a2f0bf">02</text><text x="300" y="463" fill="#b7c7ce">OBSERVE</text>
+      <text x="484" y="463" fill="#a2f0bf">03</text><text x="519" y="463" fill="#b7c7ce">UNDERSTAND</text>
+    </g>
+    <text x="1377" y="463" fill="#6f8d99" font-size="12" letter-spacing="2" text-anchor="end">FROM PIXELS TO UNDERSTANDING</text>
+  </g>
+  <g stroke-linejoin="round" stroke-linecap="round">
+    <path d="M839 284L1107 130L1366 278L1099 386Z" fill="url(#plane)" stroke="#416c62"/>
+    <g stroke="#31574f" fill="none" opacity=".8">
+      <path d="M891 314L1159 159M943 343L1211 189M995 365L1263 219M1047 384L1315 249"/>
+      <path d="M891 254L1151 365M943 224L1203 344M995 194L1255 322M1047 164L1307 300"/>
+    </g>
+    <g stroke="#a2f0bf" stroke-width="1.7">
+      <path d="M1004 199L1114 139L1220 198L1111 262Z" fill="#193a35"/>
+      <path d="M1004 199V282L1111 343V262Z" fill="url(#box)"/>
+      <path d="M1111 262V343L1220 281V198Z" fill="#102e2b"/>
+      <path d="M1114 139V222L1220 281M1114 222L1004 282" fill="none" stroke-dasharray="4 6" opacity=".4"/>
+    </g>
+    <g stroke="#8bb8f0" stroke-width="1.5" fill="none">
+      <path d="M859 218L882 205L906 218V244L882 258L859 244Z" fill="#162c40"/>
+      <path d="M859 218L882 232L906 218M882 232V258"/>
+      <path d="M906 228L1004 224M1200 307L1266 346" stroke-dasharray="4 6" opacity=".6"/>
+    </g>
+    <g fill="#a2f0bf">
+      <circle cx="1004" cy="199" r="4"/><circle cx="1114" cy="139" r="4"/>
+      <circle cx="1220" cy="198" r="4"/><circle cx="1111" cy="343" r="4"/>
+      <circle cx="1220" cy="281" r="4"/>
+    </g>
+    <circle cx="1269" cy="348" r="5" fill="#8bb8f0"/>
+    <circle cx="1269" cy="348" r="12" fill="none" stroke="#8bb8f0" opacity=".3"/>
+    <g stroke="#638776" stroke-width="1.4" fill="none">
+      <path d="M977 164V146H995M1229 146H1247V164M1247 325V343H1229M995 343H977V325"/>
+    </g>
+  </g>
+</svg>
